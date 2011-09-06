@@ -1,10 +1,19 @@
 <?php 
-	require_once("SocketManager.php");
+	require_once("SocketManager.class.php");
 	
 	class MinecraftPackets {
 		
-		public function construct() {
-			$sock = new SocketManager();
+		public function __construct() {
+			$this->sock = new SocketManager();
+		}
+		
+		public function Packet1Write($username) {
+			$package  = self::writeInt(15);
+			$package .= self::writeStr16($username);
+			$package .= self::writeLong(0);
+			$package .= self::writeByte(0);
+			
+			$this->sock->write($package);
 		}
 		
 		/*
@@ -15,7 +24,7 @@
 			$package  = chr(2); //Packet prefix
 			$package .= self::writeStr16($username);
 			
-			$sock->write($package);
+			$this->sock->write($package);
 		}
 		
 		/*
@@ -36,5 +45,31 @@
 		public static function readStr16($data) {
 			return $data;
 		}
+		
+		public static function writeByte($b) {
+			return pack('c' ,$b);
+		}
+		
+		public static function writeInt($v) {
+			$data  = self::writeByte($v >> 24 & 0xFF);
+			$data .= self::writeByte($v >> 16 & 0xFF);
+			$data .= self::writeByte($v >>  8 & 0xFF);
+			$data .= self::writeByte($v >>  0 & 0xFF);
+			
+			return $data;
+		}
+		
+		public static function writeLong($v) {
+			$data  = self::writeByte($v >> 56 & 0xFF);
+			$data  = self::writeByte($v >> 48 & 0xFF);
+			$data  = self::writeByte($v >> 40 & 0xFF);
+			$data  = self::writeByte($v >> 32 & 0xFF);
+			$data  = self::writeByte($v >> 24 & 0xFF);
+			$data .= self::writeByte($v >> 16 & 0xFF);
+			$data .= self::writeByte($v >>  8 & 0xFF);
+			$data .= self::writeByte($v >>  0 & 0xFF);
+				
+			return $data;
+		}		
 	}
 ?>
