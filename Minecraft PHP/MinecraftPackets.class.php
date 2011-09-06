@@ -59,6 +59,13 @@
 			return $data;
 		}
 		
+		public static function writeShort($v) {
+			$data .= self::writeByte($v >>  8 & 0xFF);
+			$data .= self::writeByte($v >>  0 & 0xFF);
+			
+			return $data;
+		}
+		
 		public static function writeLong($v) {
 			$data  = self::writeByte($v >> 56 & 0xFF);
 			$data  = self::writeByte($v >> 48 & 0xFF);
