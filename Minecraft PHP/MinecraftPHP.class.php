@@ -1,5 +1,5 @@
-<?php 
-	class MinecraftPHP {
-		
-	}
+<?php
+class MinecraftPHP {
+
+}
 ?>

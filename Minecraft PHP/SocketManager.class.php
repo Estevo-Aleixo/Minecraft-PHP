@@ -1,5 +1,5 @@
-<?php 
-	class SocketManager {
-		
-	}
+<?php
+class SocketManager {
+
+}
 ?>
