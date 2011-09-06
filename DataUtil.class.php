@@ -1,11 +1,11 @@
 <?php
 class DataUtil {
 	/**
-	*
-	* This function returns the given data as modified string16.
-	* @param string $data
-	* @return string16
-	*/
+	 *
+	 * This function returns the given data as modified string16.
+	 * @param string $data
+	 * @return string16
+	 */
 	public static function toStr16($data) {
 		$return  = pack("n", strlen($data));
 		$return .= mb_convert_encoding($data, "UCS-2LE");
