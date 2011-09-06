@@ -13,10 +13,10 @@ class MinecraftPackets {
 	}
 
 	public function Packet1Write($username) {
-		$package  = self::writeInt(15);
-		$package .= self::writeStr16($username);
-		$package .= self::writeLong(0);
-		$package .= self::writeByte(0);
+		$package  = self::toInt(15);
+		$package .= self::toStr16($username);
+		$package .= self::toLong(0);
+		$package .= self::toByte(0);
 			
 		//Write to socket with SockManager
 	}
@@ -28,7 +28,7 @@ class MinecraftPackets {
 	 */
 	public function Packet2Write($username) {
 		$package  = chr(2); //Packet prefix
-		$package .= self::writeStr16($username);
+		$package .= self::toStr16($username);
 			
 		//Write to socket with SockManager
 	}
@@ -44,7 +44,7 @@ class MinecraftPackets {
 	 * @param string $data
 	 * @return string16
 	 */
-	public static function writeStr16($data) {
+	public static function toStr16($data) {
 		$return  = pack("n", strlen($data));
 		$return .= mb_convert_encoding($data, "UCS-2LE");
 		return $return;
@@ -69,7 +69,7 @@ class MinecraftPackets {
 	 * This functions returns the given data as packed byte.
 	 * @param int $b
 	 */
-	public static function writeByte($b) {
+	public static function toByte($b) {
 		return pack('c' ,$b);
 	}
 
@@ -78,41 +78,41 @@ class MinecraftPackets {
 	 * This function returns the given data as int like Java does.
 	 * @param int $v
 	 */
-	public static function writeInt($v) {
-		$data  = self::writeByte($v >> 24 & 0xFF);
-		$data .= self::writeByte($v >> 16 & 0xFF);
-		$data .= self::writeByte($v >>  8 & 0xFF);
-		$data .= self::writeByte($v >>  0 & 0xFF);
+	public static function toInt($v) {
+		$data  = self::toByte($v >> 24 & 0xFF);
+		$data .= self::toByte($v >> 16 & 0xFF);
+		$data .= self::toByte($v >>  8 & 0xFF);
+		$data .= self::toByte($v >>  0 & 0xFF);
 			
 		return $data;
 	}
 
 	/**
-		*
-		* This function returns the given data as short like Java does.
-		* @param int $v
-		*/
-	public static function writeShort($v) {
-		$data .= self::writeByte($v >>  8 & 0xFF);
-		$data .= self::writeByte($v >>  0 & 0xFF);
+	 *
+	 * This function returns the given data as short like Java does.
+	 * @param int $v
+	 */
+	public static function toShort($v) {
+		$data .= self::toByte($v >>  8 & 0xFF);
+		$data .= self::toByte($v >>  0 & 0xFF);
 			
 		return $data;
 	}
 
 	/**
-		*
-		* This function returns the given data as long like Java does.
-		* @param int $v
-		*/
-	public static function writeLong($v) {
-		$data  = self::writeByte($v >> 56 & 0xFF);
-		$data  = self::writeByte($v >> 48 & 0xFF);
-		$data  = self::writeByte($v >> 40 & 0xFF);
-		$data  = self::writeByte($v >> 32 & 0xFF);
-		$data  = self::writeByte($v >> 24 & 0xFF);
-		$data .= self::writeByte($v >> 16 & 0xFF);
-		$data .= self::writeByte($v >>  8 & 0xFF);
-		$data .= self::writeByte($v >>  0 & 0xFF);
+	 *
+	 * This function returns the given data as long like Java does.
+	 * @param int $v
+	 */
+	public static function toLong($v) {
+		$data  = self::toByte($v >> 56 & 0xFF);
+		$data  = self::toByte($v >> 48 & 0xFF);
+		$data  = self::toByte($v >> 40 & 0xFF);
+		$data  = self::toByte($v >> 32 & 0xFF);
+		$data  = self::toByte($v >> 24 & 0xFF);
+		$data .= self::toByte($v >> 16 & 0xFF);
+		$data .= self::toByte($v >>  8 & 0xFF);
+		$data .= self::toByte($v >>  0 & 0xFF);
 
 		return $data;
 	}
