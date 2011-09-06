@@ -37,4 +37,5 @@ class MinecraftPackets {
 		$return = DataUtil::readStr16($return);
 		return $return;
 	}
+}
 ?>
