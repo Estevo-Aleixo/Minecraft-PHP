@@ -55,7 +55,7 @@ class DataUtil {
 	 * @param int $v
 	 */
 	public static function toShort($v) {
-		$data .= self::toByte($v >>  8 & 0xFF);
+		$data  = self::toByte($v >>  8 & 0xFF);
 		$data .= self::toByte($v >>  0 & 0xFF);
 			
 		return $data;
@@ -68,10 +68,10 @@ class DataUtil {
 	 */
 	public static function toLong($v) {
 		$data  = self::toByte($v >> 56 & 0xFF);
-		$data  = self::toByte($v >> 48 & 0xFF);
-		$data  = self::toByte($v >> 40 & 0xFF);
-		$data  = self::toByte($v >> 32 & 0xFF);
-		$data  = self::toByte($v >> 24 & 0xFF);
+		$data .= self::toByte($v >> 48 & 0xFF);
+		$data .= self::toByte($v >> 40 & 0xFF);
+		$data .= self::toByte($v >> 32 & 0xFF);
+		$data .= self::toByte($v >> 24 & 0xFF);
 		$data .= self::toByte($v >> 16 & 0xFF);
 		$data .= self::toByte($v >>  8 & 0xFF);
 		$data .= self::toByte($v >>  0 & 0xFF);
