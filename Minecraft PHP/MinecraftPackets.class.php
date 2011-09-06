@@ -3,6 +3,11 @@
 	
 	class MinecraftPackets {
 		
+		/* 
+		 * TODO:
+		 * EVERYTHING ...
+		 */
+		
 		public function __construct() {
 			$this->sock = new SocketManager();
 		}
