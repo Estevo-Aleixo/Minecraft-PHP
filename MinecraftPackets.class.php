@@ -40,7 +40,7 @@ class MinecraftPackets {
 		$package .= DataUtil::toLong(0);
 		$package .= DataUtil::toByte(0);
 
-		$this->socketManager->writetoSocket($package);
+		$this->socketManager->write($package);
 	}
 
 	/**
@@ -53,7 +53,7 @@ class MinecraftPackets {
 		$package = chr(2); // Packet prefix
 		$package .= DataUtil::toStr16($username);
 
-		$this->socketManager->writetoSocket($package);
+		$this->socketManager->write($package);
 	}
 
 	/**
