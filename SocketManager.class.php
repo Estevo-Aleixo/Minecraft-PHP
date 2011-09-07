@@ -45,7 +45,7 @@ class SocketManager {
 		$errorCode = socket_last_error();
 		$errorMsg = socket_strerror($errorCode);
 
-		die('There was a problem with the sockets:<br>['.$errorCode.'] <strong>'.$errorMsg.'</strong>');
+		die('There was a problem with the sockets: [' . $errorCode . '] ' . $errorMsg');
 	}
 
 	/**
@@ -54,7 +54,7 @@ class SocketManager {
 	 * @param  mixed $data
 	 * @return int (how many bytes are written)
 	 */
-	public function writetoSocket($data) {
+	public function write($data) {
 		$socketWrite = socket_write($this->socket, $data, strlen($data));
 		if ($socketWrite === false) {
 			$this->socketError();
