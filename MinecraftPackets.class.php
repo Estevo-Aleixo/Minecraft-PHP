@@ -16,8 +16,17 @@ class MinecraftPackets {
 	 */
 	private $socketManager = null;
 
-	public function __construct() {
+	/**
+	 * Initiates the minecraft-server connection.
+	 *
+	 * @param string $username
+	 */
+	public function __construct($username) {
 		$this->socket = new SocketManager();
+
+		$this->packet2Write($username);
+		// todo: if ($this->packet2String)
+		$this->packet1Write($username);
 	}
 
 	/**
