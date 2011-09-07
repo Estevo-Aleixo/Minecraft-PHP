@@ -1,15 +1,17 @@
 <?php
 
-require_once("DataUtil.class.php");
+require_once('util/DataUtil.class.php');
+require_once('SocketManager.class.php');
 
 class MinecraftPackets {
 	/*
 	 * TODO:
 	 * EVERYTHING ...
 	 */
+	private $socketManager = null;
 
 	public function __construct() {
-		// start SockManager?
+		$this->socket = new SocketManager();
 	}
 
 	/**
@@ -23,7 +25,7 @@ class MinecraftPackets {
 		$package .= DataUtil::toLong(0);
 		$package .= DataUtil::toByte(0);
 
-		// todo: Write to socket with SockManager (packet1Write)
+		$this->socketManager->writetoSocket($package);
 	}
 
 	/**
@@ -36,7 +38,7 @@ class MinecraftPackets {
 		$package = chr(2); // Packet prefix
 		$package .= DataUtil::toStr16($username);
 
-		// todo: Write to socket with SockManager (packet2Write)
+		$this->socketManager->writetoSocket($package);
 	}
 
 	/**
@@ -45,7 +47,7 @@ class MinecraftPackets {
 	 * @param  Str16  $data
 	 * @return string
 	 */
-	public function packet2Read($data) {
+	public function packet2string($data) {
 		return DataUtil::readStr16($data);
 	}
 
