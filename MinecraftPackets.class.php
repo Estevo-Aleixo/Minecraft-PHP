@@ -8,6 +8,12 @@ class MinecraftPackets {
 	 * TODO:
 	 * EVERYTHING ...
 	 */
+
+	/**
+	 * Represents the SocketManager class
+	 *
+	 * @var SocketManager()
+	 */
 	private $socketManager = null;
 
 	public function __construct() {

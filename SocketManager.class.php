@@ -2,6 +2,11 @@
 
 class SocketManager {
 
+	/**
+	 * Represents the before opened socket.
+	 *
+	 * @var socket
+	 */
 	private $socket = null;
 
 	/**
