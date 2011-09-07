@@ -15,7 +15,7 @@ class MinecraftPackets {
 	/**
 	 * Sends the login package.
 	 *
-	 * @param type $username
+	 * @param string $username
 	 */
 	public function packet1Write($username) {
 		$package = DataUtil::toInt(15);
@@ -42,7 +42,7 @@ class MinecraftPackets {
 	/**
 	 * Reads the handshake return.
 	 *
-	 * @param Str16 $data
+	 * @param  Str16  $data
 	 * @return string
 	 */
 	public function packet2Read($data) {
