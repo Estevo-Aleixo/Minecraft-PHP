@@ -67,7 +67,7 @@ class LoginManager {
 	public function checkLogin() {
 		if (!$this->loggedIn) {
 			$context = $this->attempLogin() || $this->handleLoginError('stream');
-			
+
 			$pos = strpos($context, ":");
 
 			if ($pos === false) {
@@ -84,14 +84,14 @@ class LoginManager {
 
 			return true;
 
-			/*$values = explode(":", $context);
+			/* $values = explode(":", $context);
 
-			$data = array(
-			    'userName' => trim($values[2]),
-			    'latestVersion' => trim($values[0]),
-			    'downloadTicket' => trim($values[1]),
-			    'sessionID' => trim($values[3])
-			);*/ // not needed atm
+			  $data = array(
+			  'userName' => trim($values[2]),
+			  'latestVersion' => trim($values[0]),
+			  'downloadTicket' => trim($values[1]),
+			  'sessionID' => trim($values[3])
+			  ); */ // not needed atm
 		}
 
 		return false;
@@ -118,7 +118,7 @@ class LoginManager {
 	 * @todo  go out of hardcoded strings.
 	 */
 	private function handleLoginError($whatError) {
-		switch($whatError){
+		switch ($whatError) {
 			case 'stream':
 				die("Couldn't fetch stream");
 				break;

@@ -54,21 +54,21 @@ class SocketManager {
 		$errorCode = socket_last_error();
 		$errorMsg = socket_strerror($errorCode);
 
-		die('There was a problem with the sockets:\n['.$errorCode .'] '.$errorMsg);
+		die('There was a problem with the sockets:\n['.$errorCode.'] '.$errorMsg);
 	}
 
 	/**
 	 * Writes $data to the initiated socket.
 	 *
 	 * @param  mixed $data
-	 * @return int (how many bytes are written)
+	 * @return int   (how many bytes are written)
 	 */
 	public function write($data) {
 		$socketWrite = socket_write($this->socket, $data, strlen($data));
 		if ($socketWrite === false) {
 			$this->socketError();
 		}
-		
+
 		return $socketWrite;
 	}
 
