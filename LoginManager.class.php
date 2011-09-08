@@ -141,6 +141,7 @@ class LoginManager {
 	 *
 	 * @param string $newUsername
 	 * @param string $newPassword
+	 * @return boolean
 	 */
 	public function changeLogin($newUsername, $newPassword) {
 		$this->loggedIn = false;
