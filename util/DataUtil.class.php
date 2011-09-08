@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Convert from X to Y.
+ *
+ * @author  _MaX_
+ * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package Minecraft-PHP
+ * @todo    create function for missing things.
+ */
+
 class DataUtil {
 
 	/**

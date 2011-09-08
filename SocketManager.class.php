@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Creates and manage the socket things.
+ *
+ * @author  kurtextem <kurtextrem@gmail.com>, _MaX_
+ * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package Minecraft-PHP
+ */
 class SocketManager {
 
 	/**
@@ -40,12 +47,14 @@ class SocketManager {
 
 	/**
 	 * Handles a socketError.
+	 *
+	 * @todo go out of hardcoded strings.
 	 */
 	public function socketError() {
 		$errorCode = socket_last_error();
 		$errorMsg = socket_strerror($errorCode);
 
-		die('There was a problem with the sockets: [' . $errorCode . '] ' . $errorMsg');
+		die('There was a problem with the sockets:\n['.$errorCode .'] '.$errorMsg);
 	}
 
 	/**

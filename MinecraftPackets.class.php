@@ -2,12 +2,17 @@
 
 require_once('util/DataUtil.class.php');
 require_once('SocketManager.class.php');
+require_once('LoginManager.class.php');
 
+/**
+ * Handles all packages.
+ *
+ * @author  kurtextem <kurtextrem@gmail.com>, _MaX_
+ * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package Minecraft-PHP
+ * @todo    everything
+ */
 class MinecraftPackets {
-	/*
-	 * TODO:
-	 * EVERYTHING ...
-	 */
 
 	/**
 	 * Represents the SocketManager class
@@ -21,7 +26,7 @@ class MinecraftPackets {
 	 *
 	 * @param string $username
 	 */
-	public function __construct($username) {
+	public function __construct($username, $password) {
 		$this->socket = new SocketManager();
 
 		$this->packet2Write($username);
