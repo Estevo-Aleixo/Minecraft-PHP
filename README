@@ -1,0 +1,12 @@
+When this project is finished you can connect to Server with PHP.
+-----------------------------------------------------------------
+
+Current tasks:
+  - Everything
+
+To get started simply make a php file with this code:
+<?php
+require_once('MinecraftPHP.class.php');
+
+new MinecraftPHP('yournickname', 'yourpassword', 'yourserverip');
+?>

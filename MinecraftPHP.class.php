@@ -31,6 +31,4 @@ class MinecraftPHP {
 
 }
 
-new MinecraftPHP('hans', 'mypassword', 'localhost');
-
 ?>
