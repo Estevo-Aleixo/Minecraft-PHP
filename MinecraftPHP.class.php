@@ -2,7 +2,12 @@
 
 require_once('MinecraftPackets.class.php');
 
-define('MINECRAFT_VERSION', 15); // update this if you get problems
+/**
+ * Update this if you get problems
+ *
+ * @todo get newest version automatically.
+ */
+define('MINECRAFT_VERSION', 17);
 
 /**
  * Initiates a server connection.
@@ -17,13 +22,15 @@ class MinecraftPHP {
 	 * Initiates a new minecraft-server connection.
 	 *
 	 * @param string $username
+	 * @param string $password
+	 * @param mixed  $serverIP
 	 */
-	public function __construct($username, $password) {
-		new MinecraftPackets($username, $password);
+	public function __construct($username, $password, $serverIP) {
+		new MinecraftPackets($username, $password, $serverIP);
 	}
 
 }
 
-new MinecraftPHP('hans', 'mypassword');
+new MinecraftPHP('hans', 'mypassword', 'localhost');
 
 ?>

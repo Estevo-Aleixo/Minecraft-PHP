@@ -121,15 +121,12 @@ class LoginManager {
 		switch ($whatError) {
 			case 'stream':
 				die("Couldn't fetch stream");
-				break;
 
 			case 'badLogin':
 				die("Couldn't login user. Maybe wrong password?");
-				break;
 
 			case 'oldVersion':
-				die("version is outdated. Update MinecraftPHP.class.php to newest version");
-				break;
+				die("Version is outdated. Update MinecraftPHP.class.php to newest version");
 
 			default:
 				die('Undefined login error.');
