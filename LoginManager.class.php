@@ -139,8 +139,8 @@ class LoginManager {
 	/**
 	 * Changes the user.
 	 *
-	 * @param string $newUsername
-	 * @param string $newPassword
+	 * @param  string  $newUsername
+	 * @param  string  $newPassword
 	 * @return boolean
 	 */
 	public function changeLogin($newUsername, $newPassword) {
