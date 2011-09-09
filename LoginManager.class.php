@@ -141,11 +141,15 @@ class LoginManager {
 	 * @return boolean
 	 */
 	public function changeLogin($newUsername, $newPassword) {
-		$this->loggedIn = false;
-		$this->username = $newUsername;
-		$this->password = $newPassword;
+		if (!$this->loggedIn) {
+			$this->loggedIn = false;
+			$this->username = $newUsername;
+			$this->password = $newPassword;
 
-		return $this->checkLogin();
+			return $this->checkLogin();
+		}
+
+		return false;
 	}
 
 }

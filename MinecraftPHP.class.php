@@ -21,12 +21,13 @@ class MinecraftPHP {
 	/**
 	 * Initiates a new minecraft-server connection.
 	 *
-	 * @param string $username
-	 * @param string $password
-	 * @param mixed  $serverIP
+	 * @param string  $username
+	 * @param string  $password
+	 * @param mixed   $serverIP
+	 * @param integer $serverPort
 	 */
-	public function __construct($username, $password, $serverIP) {
-		new MinecraftPackets($username, $password, $serverIP);
+	public function __construct($username, $password, $serverIP, $serverPort = 25565) {
+		new MinecraftPackets($username, $password, $serverIP, $serverPort);
 	}
 
 }

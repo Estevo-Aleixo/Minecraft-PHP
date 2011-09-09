@@ -26,8 +26,8 @@ class MinecraftPackets {
 	 *
 	 * @param string $username
 	 */
-	public function __construct($username, $password, $serverIP) {
-		$this->socket = new SocketManager();
+	public function __construct($username, $password, $serverIP, $serverPort) {
+		$this->socket = new SocketManager($serverIP, $serverPort);
 
 		$this->packet2Write($username);
 		// todo: if ($this->packet2String)

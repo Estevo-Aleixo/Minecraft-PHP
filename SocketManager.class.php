@@ -17,23 +17,59 @@ class SocketManager {
 	private $socket = null;
 
 	/**
-	 * Calls the socket initiator.
+	 * Represents the server ip / url.
+	 *
+	 * @var mixed
 	 */
-	public function __construct() {
-		if ($this->initSocket() === false) {
-			$this->socketError();
-		}
+	public $serverIP;
+
+	/**
+	 * Represents the port from the server.
+	 *
+	 * @var integer
+	 */
+	public $serverPort = 25565;
+
+	/**
+	 * Are we connected yet?
+	 *
+	 * @var boolean
+	 */
+	public $isConnected = false;
+
+	/**
+	 * Calls the socket initiator.
+	 *
+	 * @param mixed   $serverIP
+	 * @param integer $serverPort
+	 */
+	public function __construct($serverIP, $serverPort) {
+		$this->serverIP = $serverIP;
+		$this->serverPort = $serverPort;
+
+		$this->initSocket();
 	}
 
 	/**
 	 * Initiates the socket.
 	 *
-	 * @return boolean
+	 * @return mixed
 	 */
 	private function initSocket() {
-		$this->socket = socket_create(AF_INET, SOCK_STREAM, getprotobyname('tcp'));
+		if (!$this->isConnected) {
+			$this->socket = socket_create(AF_INET, SOCK_STREAM, getprotobyname('tcp'));
+			if ($this->socket === false)
+				$this->socketError();
+			$result = socket_connect($this->socket, $this->serverIP, $this->serverPort);
+			if ($result === false)
+				$this->socketError();
 
-		return $this->socket;
+			$this->isConnected = true;
+
+			return $result;
+		}
+
+		return false;
 	}
 
 	/**
@@ -64,12 +100,35 @@ class SocketManager {
 	 * @return int   (how many bytes are written)
 	 */
 	public function write($data) {
-		$socketWrite = socket_write($this->socket, $data, strlen($data));
-		if ($socketWrite === false) {
-			$this->socketError();
+		if ($this->isConnected) {
+			$socketWrite = socket_write($this->socket, $data, strlen($data));
+			if ($socketWrite === false) {
+				$this->socketError();
+			}
+
+			return $socketWrite;
 		}
 
-		return $socketWrite;
+		return false;
+	}
+
+	/**
+	 * Change the server connection.
+	 *
+	 * @param  mixed   $newServerIP
+	 * @param  integer $newServerPort
+	 * @return mixed
+	 */
+	public function changeServer($newServerIP, $newServerPort = 25565) {
+		if (!$this->isConnected) {
+			$this->isConnected = false;
+			$this->serverIP = $newServerIP;
+			$this->serverPort = $newServerPort;
+
+			return $this->initSocket();
+		}
+
+		return false;
 	}
 
 }
