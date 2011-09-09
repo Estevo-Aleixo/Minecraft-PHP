@@ -113,6 +113,15 @@ class SocketManager {
 	}
 
 	/**
+	 * Reads data from the socket.
+	 *
+	 * @todo create the function.
+	 */
+	public function read() {
+
+	}
+
+	/**
 	 * Change the server connection.
 	 *
 	 * @param  mixed   $newServerIP
@@ -126,6 +135,42 @@ class SocketManager {
 			$this->serverPort = $newServerPort;
 
 			return $this->initSocket();
+		}
+
+		return false;
+	}
+
+	/**
+	 * Disconnects from server.
+	 *
+	 * @return mixed
+	 */
+	public function disconnect() {
+		if ($this->isConnected) {
+			$this->write(DataUtil::toStr16('Bye from PHP Minecraft API @.@'));
+			$close = socket_close($this->socket);
+
+			$this->isConnected = false;
+
+			if ($close === false)
+				$this->socketError();
+
+			return $close;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Reconnets to server (after disconnect).
+	 *
+	 * @return boolean
+	 */
+	public function reconnect() {
+		if (!$this->isConnected) {
+			$this->initSocket();
+
+			return true;
 		}
 
 		return false;
