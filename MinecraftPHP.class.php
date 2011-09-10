@@ -7,17 +7,16 @@ require_once('MinecraftPackets.class.php');
  *
  * @todo get newest version automatically.
  */
-define('MINECRAFT_VERSION', 17);
 
 /**
  * Initiates a server connection.
  *
- * @author  kurtextem <kurtextrem@gmail.com>, _MaX_
+ * @author  kurtextem <kurtextrem@gmail.com>, Max
  * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package Minecraft-PHP
  */
 class MinecraftPHP {
-
+		
 	/**
 	 * Initiates a new minecraft-server connection.
 	 *

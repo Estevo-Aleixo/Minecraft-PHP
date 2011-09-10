@@ -3,7 +3,7 @@
 /**
  * Creates and manage the socket things.
  *
- * @author  kurtextem <kurtextrem@gmail.com>, _MaX_
+ * @author  kurtextem <kurtextrem@gmail.com>, Max
  * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package Minecraft-PHP
  */
@@ -37,6 +37,8 @@ class SocketManager {
 	 */
 	public $isConnected = false;
 
+	const SOCKET_READ_MAX = 512;
+	
 	/**
 	 * Calls the socket initiator.
 	 *
@@ -113,12 +115,29 @@ class SocketManager {
 	}
 
 	/**
+	* Returns a count of modified sockets
+	* Note: This returns 0 if no sockets modified
+	*
+	* @return integer
+	*/
+	public function check() {
+		$read   = array($this->socket);
+		$write  = array($this->socket);
+		$except = array($this->socket);
+		if (($state = socket_select($read, $write, $except, self::SOCKET_CHECK_TIMEOUT, self::SOCKET_CHECK_TIMEOUT)) === false)
+			die("An error occoured: ".socket_strerror(socket_last_error($this->socket)), socket_last_error($this->socket));
+		
+		return count($read);
+	}
+	
+	/**
 	 * Reads data from the socket.
 	 *
 	 * @todo create the function.
 	 */
 	public function read() {
-
+		if (($line = socket_read($this->socket, self::SOCKET_READ_MAX, PHP_NORMAL_READ)) === false)
+			die("An error occoured while reading from socket: ".socket_strerror(socket_last_error($this->socket)), socket_last_error($this->socket));
 	}
 
 	/**

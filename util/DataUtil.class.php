@@ -3,7 +3,7 @@
 /**
  * Convert from X to Y.
  *
- * @author  _MaX_
+ * @author  Max
  * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package Minecraft-PHP
  * @todo    create function for missing things.
