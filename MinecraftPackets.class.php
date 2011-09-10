@@ -72,6 +72,10 @@ class MinecraftPackets {
 		return DataUtil::readStr16($data);
 	}
 
+	public function packet3Write($message) {
+		$package = chr(3); // Packet prefix
+		$package .= DataUtil::toStr16($message);
+	}
 }
 
 ?>

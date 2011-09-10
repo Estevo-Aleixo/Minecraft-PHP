@@ -19,7 +19,8 @@ class DataUtil {
 	 */
 	public static function toStr16($data) {
 		$return = pack("n", strlen($data));
-		$return .= mb_convert_encoding($data, "UCS-2LE");
+		$return .= mb_convert_encoding($data, "UTF-16");
+
 		return $return;
 	}
 
