@@ -20,11 +20,17 @@ class MinecraftPackets {
 	 * @var SocketManager()
 	 */
 	private $socketManager = null;
-	
+
+	/**
+	 * Represents the Protocol version.
+	 */
 	const PROTOCOL_VERSION = 15;
-	
+
+	/**
+	 * Contains allowed chars to use in the Protocol.
+	 */
 	const ALLOWED_CHARS = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_abcdefghijklmnopqrstuvwxyz{|}~⌂ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜø£Ø×ƒáíóúñÑªº¿®¬½¼¡«»";
-	
+
 	/**
 	 * Initiates the minecraft-server connection.
 	 *
@@ -33,25 +39,35 @@ class MinecraftPackets {
 	public function __construct($username, $password, $serverIP, $serverPort) {
 		$this->socket = new SocketManager($serverIP, $serverPort);
 	}
-	
+
+	/**
+	 * Sends the first package.
+	 *
+	 * @param mixed $data
+	 */
 	public function packet0Write($data) {
 		$package = chr(0);
 		$package .= $data;
-		
+
 		$this->socketManager->write($package);
 	}
-	
+
+	/**
+	 * Reads the first-package return.
+	 *
+	 * @param mixed $data
+	 */
 	public function packet0Read($data) {
 		$this->packet0Write($data);
 	}
-	
+
 	/**
 	 * Sends the login package.
 	 *
 	 * @param string $username
 	 */
 	public function packet1Write($username) {
-		$package =  chr(1);
+		$package = chr(1);
 		$package .= DataUtil::toInt(self::PROTOCOL_VERSION);
 		$package .= DataUtil::toStr16($username);
 		$package .= DataUtil::toLong(0);
@@ -83,11 +99,19 @@ class MinecraftPackets {
 		return DataUtil::readStr16($data);
 	}
 
+	/**
+	 * Writes the 4th package.
+	 *
+	 * @param string $message
+	 */
 	public function packet3Write($message) {
-		$message = preg_replace('/[^' . self::ALLOWED_CHARS . ']*/i', '', $message);
+		$message = preg_replace('/[^'.self::ALLOWED_CHARS.']*/i', '', $message);
 		$package = chr(3); // Packet prefix
 		$package .= DataUtil::toStr16($message);
+
+		$this->socketManager->write($package);
 	}
+
 }
 
 ?>

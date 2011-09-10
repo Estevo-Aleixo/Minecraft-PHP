@@ -1,7 +1,7 @@
 <?php
 require_once('../util/DataUtil.class.php');
 
-$username = "Bottie";
+$username = "§5B§1O§bT§2T§eI"; // rainboy nick
 
 $fp = fsockopen("max-m.dyndns.org", 25566, $errno, $errstr, 5);
 stream_set_timeout($fp, 2);

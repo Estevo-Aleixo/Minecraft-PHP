@@ -38,7 +38,7 @@ class SocketManager {
 	public $isConnected = false;
 
 	const SOCKET_READ_MAX = 512;
-	
+
 	/**
 	 * Calls the socket initiator.
 	 *
@@ -61,10 +61,10 @@ class SocketManager {
 		if (!$this->isConnected) {
 			$this->socket = socket_create(AF_INET, SOCK_STREAM, getprotobyname('tcp'));
 			if ($this->socket === false)
-				$this->socketError();
+				$this->socketError('initiating socket');
 			$result = socket_connect($this->socket, $this->serverIP, $this->serverPort);
 			if ($result === false)
-				$this->socketError();
+				$this->socketError('connecting to socket');
 
 			$this->isConnected = true;
 
@@ -88,11 +88,11 @@ class SocketManager {
 	 *
 	 * @todo go out of hardcoded strings.
 	 */
-	public function socketError() {
+	public function socketError($msg = 'the sockets') {
 		$errorCode = socket_last_error();
 		$errorMsg = socket_strerror($errorCode);
 
-		die('There was a problem with the sockets:\n['.$errorCode.'] '.$errorMsg);
+		die('There was a problem with '.$msg.':\n['.$errorCode.'] '.$errorMsg);
 	}
 
 	/**
@@ -105,7 +105,7 @@ class SocketManager {
 		if ($this->isConnected) {
 			$socketWrite = socket_write($this->socket, $data, strlen($data));
 			if ($socketWrite === false) {
-				$this->socketError();
+				$this->socketError('writing data');
 			}
 
 			return $socketWrite;
@@ -115,21 +115,22 @@ class SocketManager {
 	}
 
 	/**
-	* Returns a count of modified sockets
-	* Note: This returns 0 if no sockets modified
-	*
-	* @return integer
-	*/
+	 * Returns a count of modified sockets
+	 * Note: This returns 0 if no sockets modified
+	 *
+	 * @return integer
+	 */
 	public function check() {
-		$read   = array($this->socket);
-		$write  = array($this->socket);
+		$read = array($this->socket);
+		$write = array($this->socket);
 		$except = array($this->socket);
 		if (($state = socket_select($read, $write, $except, self::SOCKET_CHECK_TIMEOUT, self::SOCKET_CHECK_TIMEOUT)) === false)
-			die("An error occoured: ".socket_strerror(socket_last_error($this->socket)), socket_last_error($this->socket));
-		
+			$this->socketError('checking modified sockets');
+
+
 		return count($read);
 	}
-	
+
 	/**
 	 * Reads data from the socket.
 	 *
@@ -137,7 +138,7 @@ class SocketManager {
 	 */
 	public function read() {
 		if (($data = socket_read($this->socket, self::SOCKET_READ_MAX, PHP_NORMAL_READ)) === false)
-			die("An error occoured while reading from socket: ".socket_strerror(socket_last_error($this->socket)), socket_last_error($this->socket));
+			$this->socketError('reading from the socket');
 	}
 
 	/**
@@ -172,7 +173,7 @@ class SocketManager {
 			$this->isConnected = false;
 
 			if ($close === false)
-				$this->socketError();
+				$this->socketError('disconnecting');
 
 			return $close;
 		}
