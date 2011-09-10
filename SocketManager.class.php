@@ -136,7 +136,7 @@ class SocketManager {
 	 * @todo create the function.
 	 */
 	public function read() {
-		if (($line = socket_read($this->socket, self::SOCKET_READ_MAX, PHP_NORMAL_READ)) === false)
+		if (($data = socket_read($this->socket, self::SOCKET_READ_MAX, PHP_NORMAL_READ)) === false)
 			die("An error occoured while reading from socket: ".socket_strerror(socket_last_error($this->socket)), socket_last_error($this->socket));
 	}
 
