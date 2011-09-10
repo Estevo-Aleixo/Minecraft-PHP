@@ -40,7 +40,8 @@ class MinecraftPackets {
 	 * @param string $username
 	 */
 	public function packet1Write($username) {
-		$package = DataUtil::toInt(15);
+		$package =  chr(1);
+		$package .= DataUtil::toInt(15);
 		$package .= DataUtil::toStr16($username);
 		$package .= DataUtil::toLong(0);
 		$package .= DataUtil::toByte(0);
