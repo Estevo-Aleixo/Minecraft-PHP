@@ -27,11 +27,6 @@ class MinecraftPackets {
 	const PROTOCOL_VERSION = 15;
 
 	/**
-	 * Contains allowed chars to use in the Protocol.
-	 */
-	const ALLOWED_CHARS = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_abcdefghijklmnopqrstuvwxyz{|}~⌂ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜø£Ø×ƒáíóúñÑªº¿®¬½¼¡«»";
-
-	/**
 	 * Initiates the minecraft-server connection.
 	 *
 	 * @param string $username
@@ -105,7 +100,7 @@ class MinecraftPackets {
 	 * @param string $message
 	 */
 	public function packet3Write($message) {
-		$message = preg_replace('/[^'.self::ALLOWED_CHARS.']*/i', '', $message);
+		$message = preg_replace('/[^A-Za-z0-9 !"#$%&\'()*+,-.\/:;<=>\?@\[\]\^_{\|}\\~¦ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜø£Ø×ƒáíóúñÑªº¿®¬½¼¡«»]*/i', '', $message);
 		$package = chr(3); // Packet prefix
 		$package .= DataUtil::toStr16($message);
 
