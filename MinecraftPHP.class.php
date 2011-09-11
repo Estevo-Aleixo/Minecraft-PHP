@@ -20,9 +20,9 @@ spl_autoload_register(function ($class) {
 class MinecraftPHP {
 	private $createSession = false;
 	private $password = '';
-	public  $username = 'MinecraftPHP-Bot';
-	public  $serverHost = "127.0.0.1";
-	public  $serverPort = 25565;
+	private $username = 'MinecraftPHP-Bot';
+	private $serverHost = "127.0.0.1";
+	private $serverPort = 25565;
 	
 	/**
 	 * Initiates a new minecraft-server connection.
