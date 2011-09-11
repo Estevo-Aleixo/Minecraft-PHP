@@ -1,8 +1,5 @@
 <?php
-
 require_once('util/DataUtil.class.php');
-require_once('SocketManager.class.php');
-require_once('LoginManager.class.php');
 
 /**
  * Handles all packages.
@@ -31,8 +28,8 @@ class MinecraftPackets {
 	 *
 	 * @param string $username
 	 */
-	public function __construct($username, $password, $serverIP, $serverPort) {
-		$this->socket = new SocketManager($serverIP, $serverPort);
+	public function __construct(SocketManager $socket) {
+		$this->socketManager = $socket;
 	}
 
 	/**
@@ -62,11 +59,14 @@ class MinecraftPackets {
 	 * @param string $username
 	 */
 	public function packet1Write($username) {
-		$package = chr(1);
-		$package .= DataUtil::toInt(self::PROTOCOL_VERSION);
-		$package .= DataUtil::toStr16($username);
-		$package .= DataUtil::toLong(0);
-		$package .= DataUtil::toByte(0);
+			$package =  chr(1);
+			$package .= DataUtil::toInt(self::PROTOCOL_VERSION);
+			$package .= DataUtil::toStr16($username);
+			$package .= DataUtil::toLong(0);
+			$package .= DataUtil::toInt(0);
+			$package .= DataUtil::toByte(0);
+			$package .= DataUtil::toByte(0);
+			$package .= DataUtil::toByte(0);
 
 		$this->socketManager->write($package);
 	}
@@ -100,7 +100,7 @@ class MinecraftPackets {
 	 * @param string $message
 	 */
 	public function packet3Write($message) {
-		$message = preg_replace('/[^A-Za-z0-9 !"#$%&\'()*+,-.\/:;<=>\?@\[\]\^_{\|}\\~¦ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜø£Ø×ƒáíóúñÑªº¿®¬½¼¡«»]*/i', '', $message);
+		//$message = preg_replace('/[^A-Za-z0-9 !"#$%&\'()*+,-.\/:;<=>\?@\[\]\^_{\|}\\~¦ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜø£Ø×ƒáíóúñÑªº¿®¬½¼¡«»]*/i', '', $message);
 		$package = chr(3); // Packet prefix
 		$package .= DataUtil::toStr16($message);
 
