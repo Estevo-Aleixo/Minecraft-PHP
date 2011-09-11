@@ -4,12 +4,11 @@ namespace de\wbbaddons\minecraft\api\util;
 /**
  * Convert from X to Y.
  *
- * @author  Max
- * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package Minecraft-PHP
- * @todo    create function for missing things.
+ * @author  	Max
+ * @license 	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package 	de\wbbaddons\minecraft\api
+ * @subpackage	util
  */
-
 class DataUtil {
 
 	/**

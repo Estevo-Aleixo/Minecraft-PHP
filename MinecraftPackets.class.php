@@ -5,10 +5,9 @@ use util\DataUtil;
 /**
  * Handles all packages.
  *
- * @author  kurtextem <kurtextrem@gmail.com>, Max
- * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package Minecraft-PHP
- * @todo    everything
+ * @author  	kurtextem <kurtextrem@gmail.com>, Max
+ * @license 	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package 	de\wbbaddons\minecraft\api
  */
 class MinecraftPackets {
 

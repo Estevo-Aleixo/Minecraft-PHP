@@ -13,9 +13,9 @@ spl_autoload_register(function ($class) {
 /**
  * Initiates a server connection.
  *
- * @author  kurtextem <kurtextrem@gmail.com>, Max
- * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package Minecraft-PHP
+ * @author  	kurtextem <kurtextrem@gmail.com>, Max
+ * @license 	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package 	de\wbbaddons\minecraft\api
  */
 class MinecraftPHP {
 	private $createSession = false;

@@ -3,9 +3,9 @@ namespace de\wbbaddons\minecraft\api;
 /**
  * Creates a new user session.
  *
- * @author  kurtextem <kurtextrem@gmail.com>
- * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package Minecraft-PHP
+ * @author  	kurtextem <kurtextrem@gmail.com>
+ * @license 	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package 	de\wbbaddons\minecraft\api
  */
 class LoginManager {
 
