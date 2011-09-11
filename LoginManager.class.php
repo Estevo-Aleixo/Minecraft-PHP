@@ -66,15 +66,16 @@ class LoginManager {
 	 */
 	public function checkLogin() {
 		if (!$this->loggedIn) {
-			$context = $this->attempLogin() || $this->handleLoginError('stream');
+			$context = $this->attempLogin();
+			if (!$context) throw new exception\ConnectionException('Could not open stream');;
 
 			$pos = strpos($context, ":");
 
 			if ($pos === false) {
 				if (trim($context) == 'Bad login') {
-					$this->handleLoginError('badLogin');
+					throw new exception\ConnectionException('Login-Information refused by minecraft');
 				} elseif (trim($context) == 'Old version') {
-					$this->handleLoginError('oldVersion');
+					throw new exception\ConnectionException('Version outdated. Please update this package');
 				} else {
 					die(trim($context));
 				}
@@ -109,28 +110,6 @@ class LoginManager {
 			return false;
 
 		return $context;
-	}
-
-	/**
-	 * Handles login error.
-	 *
-	 * @param string $whatError
-	 * @todo  go out of hardcoded strings.
-	 */
-	private function handleLoginError($whatError) {
-		switch ($whatError) {
-			case 'stream':
-				die("Couldn't fetch stream");
-
-			case 'badLogin':
-				die("Couldn't login user. Maybe wrong password?");
-
-			case 'oldVersion':
-				die("Version is outdated. Update MinecraftPHP.class.php to newest version");
-
-			default:
-				die('Undefined login error.');
-		}
 	}
 
 	/**

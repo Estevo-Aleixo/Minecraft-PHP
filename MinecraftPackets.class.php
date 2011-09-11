@@ -14,7 +14,7 @@ class MinecraftPackets {
 	/**
 	 * Represents the SocketManager class
 	 *
-	 * @var SocketManager()
+	 * @var SocketManager
 	 */
 	private $socketManager = null;
 
