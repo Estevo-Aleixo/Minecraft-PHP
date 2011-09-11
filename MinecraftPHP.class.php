@@ -33,7 +33,6 @@ class MinecraftPHP {
 			//should be tested after handshake, but for now this is good enough ... 
 			//if sever returns a "-", we don't need to create a sesseion, if it returns a "+", we have to.
 			//It could also return a unique hash, if so: http://www.minecraft.net/game/joinserver.jsp?user=<username>&sessionId=<session id>&serverId=<server hash>
-			require_once('LoginManager.class.php');
 			new LoginManager($this->username, $this->password);
 		}
 		$this->socket  = new SocketManager($this->serverHost, $this->serverPort);
