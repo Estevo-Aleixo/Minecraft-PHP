@@ -19,10 +19,10 @@ spl_autoload_register(function ($class) {
  */
 class MinecraftPHP {
 	private $createSession = false;
-	private $password 		= "";
-	public  $username  		= "MinecraftPHP-Bot";
-	public  $serverHost 	= "127.0.0.1";
-	public  $serverPort 	= 25565;
+	private $password = '';
+	public  $username = 'MinecraftPHP-Bot';
+	public  $serverHost = "127.0.0.1";
+	public  $serverPort = 25565;
 	
 	/**
 	 * Initiates a new minecraft-server connection.
@@ -46,7 +46,6 @@ class MinecraftPHP {
 	public function connect() {
 		$this->packets->packet2Write($this->username);
 		
-		$answered = false;
 		do {
 			if ($this->socket->check() > 0) {
 				$data = $this->socket->read();
@@ -56,7 +55,6 @@ class MinecraftPHP {
 		
 		$this->packets->packet1Write($this->username);
 		
-		$loggedIn = false;
 		do {
 			if ($this->socket->check() > 0) {
 				$data = $this->socket->read();
