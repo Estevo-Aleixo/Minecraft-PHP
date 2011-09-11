@@ -101,7 +101,6 @@ class MinecraftPackets {
 	 * @param string $message
 	 */
 	public function packet3Write($message) {
-		//$message = preg_replace('/[^A-Za-z0-9 !"#$%&\'()*+,-.\/:;<=>\?@\[\]\^_{\|}\\~¦ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜø£Ø×ƒáíóúñÑªº¿®¬½¼¡«»]*/i', '', $message);
 		$package = chr(3); // Packet prefix
 		$package .= DataUtil::toStr16($message);
 
