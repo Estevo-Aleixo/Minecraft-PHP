@@ -36,8 +36,6 @@ class DataUtil {
 		return $data;
 	}
 
-	// todo: test the following functions.
-
 	/**
 	 * This functions returns the given data as packed byte.
 	 *
