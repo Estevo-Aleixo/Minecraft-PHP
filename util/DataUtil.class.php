@@ -1,4 +1,5 @@
 <?php
+namespace de\wbbaddons\minecraft\api\util;
 
 /**
  * Convert from X to Y.

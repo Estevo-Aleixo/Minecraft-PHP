@@ -1,7 +1,8 @@
 <?php
-require_once('MinecraftPackets.class.php');
-require_once('SocketManager.class.php');
-require_once('CommandParser.class.php');
+namespace de\wbbaddons\minecraft\api;
+spl_autoload_register(function ($class) {
+	require_once(__DIR__.'/'.str_replace(array('de\\wbbaddons\\minecraft\\api', '\\'), array('', DIRECTORY_SEPARATOR), $class).'.class.php');
+});
 
 /**
  * Update this if you get problems
@@ -103,5 +104,4 @@ class MinecraftPHP {
 		$this->createSesseion = $s;
 	}
 }
-
 ?>

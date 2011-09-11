@@ -1,5 +1,5 @@
 <?php
-
+namespace de\wbbaddons\minecraft\api;
 /**
  * Creates a new user session.
  *

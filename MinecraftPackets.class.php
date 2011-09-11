@@ -1,5 +1,6 @@
 <?php
-require_once('util/DataUtil.class.php');
+namespace de\wbbaddons\minecraft\api;
+use util\DataUtil;
 
 /**
  * Handles all packages.
