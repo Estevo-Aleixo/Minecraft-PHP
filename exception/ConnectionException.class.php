@@ -10,4 +10,4 @@ namespace de\wbbaddons\minecraft\api\exception;
  * @package 	de\wbbaddons\minecraft\api
  * @subpackage 	exception
  */
-class ConnectionException extends \Exception { }
+class ConnectionException extends \Exception {}
