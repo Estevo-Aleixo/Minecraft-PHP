@@ -1,6 +1,7 @@
 <?php
+
 namespace de\wbbaddons\minecraft\api;
-use util\DataUtil;
+use de\wbbaddons\minecraft\api\util;
 
 /**
  * Handles all packages.
@@ -59,14 +60,14 @@ class MinecraftPackets {
 	 * @param string $username
 	 */
 	public function packet1Write($username) {
-			$package =  chr(1);
-			$package .= DataUtil::toInt(self::PROTOCOL_VERSION);
-			$package .= DataUtil::toStr16($username);
-			$package .= DataUtil::toLong(0);
-			$package .= DataUtil::toInt(0);
-			$package .= DataUtil::toByte(0);
-			$package .= DataUtil::toByte(0);
-			$package .= DataUtil::toByte(0);
+		$package = chr(1);
+		$package .= DataUtil::toInt(self::PROTOCOL_VERSION);
+		$package .= DataUtil::toStr16($username);
+		$package .= DataUtil::toLong(0);
+		$package .= DataUtil::toInt(0);
+		$package .= DataUtil::toByte(0);
+		$package .= DataUtil::toByte(0);
+		$package .= DataUtil::toByte(0);
 
 		$this->socketManager->write($package);
 	}
