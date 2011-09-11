@@ -1,7 +1,6 @@
 <?php
-
 namespace de\wbbaddons\minecraft\api;
-use de\wbbaddons\minecraft\api\util;
+use de\wbbaddons\minecraft\api\util\DataUtil;
 
 /**
  * Handles all packages.
