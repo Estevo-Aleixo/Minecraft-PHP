@@ -69,7 +69,7 @@ class MinecraftPHP {
 	* Connection main loop
 	*/
 	protected function listen() {
-		while ($this->socket->isConnected == true) {
+		while ($this->socket->isConnected) {
 			if ($this->socket->check() > 0) {
 				$data = $this->socket->read();
 				CommandParser::parse($data);
