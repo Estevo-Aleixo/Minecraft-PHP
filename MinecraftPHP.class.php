@@ -101,4 +101,3 @@ class MinecraftPHP {
 		$this->createSesseion = $s;
 	}
 }
-?>
