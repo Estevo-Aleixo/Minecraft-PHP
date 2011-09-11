@@ -13,9 +13,9 @@ spl_autoload_register(function ($class) {
 /**
  * Initiates a server connection.
  *
- * @author  kurtextem <kurtextrem@gmail.com>, Max
- * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package Minecraft-PHP
+ * @author  	kurtextem <kurtextrem@gmail.com>, Max
+ * @license 	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package 	de\wbbaddons\minecraft\api
  */
 class MinecraftPHP {
 	private $createSession = false;
@@ -33,7 +33,6 @@ class MinecraftPHP {
 			//should be tested after handshake, but for now this is good enough ... 
 			//if sever returns a "-", we don't need to create a sesseion, if it returns a "+", we have to.
 			//It could also return a unique hash, if so: http://www.minecraft.net/game/joinserver.jsp?user=<username>&sessionId=<session id>&serverId=<server hash>
-			require_once('LoginManager.class.php');
 			new LoginManager($this->username, $this->password);
 		}
 		$this->socket  = new SocketManager($this->serverHost, $this->serverPort);
@@ -102,4 +101,3 @@ class MinecraftPHP {
 		$this->createSesseion = $s;
 	}
 }
-?>

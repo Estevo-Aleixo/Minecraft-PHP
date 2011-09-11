@@ -6,4 +6,3 @@ class CommandParser {
 		return $data;
 	}
 }
-?>
