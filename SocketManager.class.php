@@ -127,8 +127,6 @@ class SocketManager {
 		if (($state = socket_select($read, $write, $except, self::SOCKET_CHECK_TIMEOUT, self::SOCKET_CHECK_TIMEOUT)) === false)
 			$this->socketError('checking modified sockets');
 
-
-		print_r($state);
 		return $state;
 	}
 

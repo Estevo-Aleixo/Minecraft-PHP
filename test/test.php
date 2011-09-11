@@ -8,7 +8,7 @@ class Test {
 $test = new Test();
 $mc = 	new MinecraftPHP();
 $mc->setServerPort(25566);
-$mc->setUsername('§5B§1O§bT§2T§eI');
+$mc->setUsername('jeb_'); //Muhaha, we are so evil :>
 $mc->init();
 $mc->disconnect();
 ?>
