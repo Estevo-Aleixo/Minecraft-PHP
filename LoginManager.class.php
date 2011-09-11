@@ -1,5 +1,7 @@
 <?php
+
 namespace de\wbbaddons\minecraft\api;
+
 /**
  * Creates a new user session.
  *
@@ -67,7 +69,8 @@ class LoginManager {
 	public function checkLogin() {
 		if (!$this->loggedIn) {
 			$context = $this->attempLogin();
-			if (!$context) throw new exception\ConnectionException('Could not open stream');;
+			if (!$context)
+				throw new exception\ConnectionException('Could not open stream');;
 
 			$pos = strpos($context, ":");
 

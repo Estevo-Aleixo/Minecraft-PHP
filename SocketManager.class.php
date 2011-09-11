@@ -1,5 +1,7 @@
 <?php
+
 namespace de\wbbaddons\minecraft\api;
+
 /**
  * Creates and manage the socket things.
  *
@@ -138,7 +140,7 @@ class SocketManager {
 	public function read() {
 		if (($data = socket_read($this->socket, self::SOCKET_READ_MAX)) === false)
 			$this->socketError('reading from the socket');
-		
+
 		return $data;
 	}
 
@@ -168,7 +170,7 @@ class SocketManager {
 	 */
 	public function disconnect() {
 		if ($this->isConnected) {
-			$this->write(chr(255) . DataUtil::toStr16('Bye from PHP Minecraft API'));
+			$this->write(chr(255).DataUtil::toStr16('Bye from PHP Minecraft API'));
 			$close = socket_close($this->socket);
 
 			$this->isConnected = false;
