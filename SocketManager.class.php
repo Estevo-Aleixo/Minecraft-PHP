@@ -37,7 +37,8 @@ class SocketManager {
 	 */
 	public $isConnected = false;
 
-	const SOCKET_READ_MAX = 512;
+	const SOCKET_READ_MAX = 64;
+	const SOCKET_CHECK_TIMEOUT = 5;
 
 	/**
 	 * Calls the socket initiator.
@@ -92,7 +93,7 @@ class SocketManager {
 		$errorCode = socket_last_error();
 		$errorMsg = socket_strerror($errorCode);
 
-		die('There was a problem with '.$msg.':\n['.$errorCode.'] '.$errorMsg);
+		die('There was a problem with '.$msg.":\n[".$errorCode.'] '.$errorMsg);
 	}
 
 	/**
@@ -122,13 +123,13 @@ class SocketManager {
 	 */
 	public function check() {
 		$read = array($this->socket);
-		$write = array($this->socket);
-		$except = array($this->socket);
+		$write = $except = null;
 		if (($state = socket_select($read, $write, $except, self::SOCKET_CHECK_TIMEOUT, self::SOCKET_CHECK_TIMEOUT)) === false)
 			$this->socketError('checking modified sockets');
 
 
-		return count($read);
+		print_r($state);
+		return $state;
 	}
 
 	/**
@@ -137,8 +138,10 @@ class SocketManager {
 	 * @todo create the function.
 	 */
 	public function read() {
-		if (($data = socket_read($this->socket, self::SOCKET_READ_MAX, PHP_NORMAL_READ)) === false)
+		if (($data = socket_read($this->socket, self::SOCKET_READ_MAX)) === false)
 			$this->socketError('reading from the socket');
+		
+		return $data;
 	}
 
 	/**
@@ -167,7 +170,7 @@ class SocketManager {
 	 */
 	public function disconnect() {
 		if ($this->isConnected) {
-			$this->write(DataUtil::toStr16('Bye from PHP Minecraft API @.@'));
+			$this->write(chr(255) . DataUtil::toStr16('Bye from PHP Minecraft API'));
 			$close = socket_close($this->socket);
 
 			$this->isConnected = false;

@@ -1,6 +1,7 @@
 <?php
 require_once('MinecraftPackets.class.php');
 require_once('SocketManager.class.php');
+require_once('CommandParser.class.php');
 
 /**
  * Update this if you get problems
@@ -27,7 +28,10 @@ class MinecraftPHP {
 	 *
 	 */
 	public function init() {
-		if($this->createSession == true) { //should be tested after handshake, but for now this is good enough ... if sever returns a "-", we don't need to create a sesseion, if it returns a "+", we have to. It could also return a unique hash, I don't know, what it is for ...
+		if($this->createSession == true) {
+			//should be tested after handshake, but for now this is good enough ... 
+			//if sever returns a "-", we don't need to create a sesseion, if it returns a "+", we have to.
+			//It could also return a unique hash, if so: http://www.minecraft.net/game/joinserver.jsp?user=<username>&sessionId=<session id>&serverId=<server hash>
 			require_once('LoginManager.class.php');
 			new LoginManager($this->username, $this->password);
 		}
@@ -35,18 +39,47 @@ class MinecraftPHP {
 		$this->packets = new MinecraftPackets($this->socket);
 		
 		$this->connect();
+		$this->listen();
 	}
 	
 	public function connect() {
 		$this->packets->packet2Write($this->username);
-		//TODO: Check what the server returns ...
+		
+		$answered = false;
+		do {
+			if ($this->socket->check() > 0) {
+				$data = $this->socket->read();
+				$answered = CommandParser::parse($data);
+			}
+		} while(!$answered);
+		
 		$this->packets->packet1Write($this->username);
-		//TODO: Check if successed or failed ...
-		sleep(5); //dirty
-		$this->packets->packet3Write("Hello");
-		$this->packets->packet3Write("and");
-		$this->packets->packet3Write("bye");
-		sleep(2);
+		
+		$loggedIn = false;
+		do {
+			if ($this->socket->check() > 0) {
+				$data = $this->socket->read();
+				$loggedIn = CommandParser::parse($data);
+			}
+		} while(!$loggedIn);
+		
+		$this->packets->packet3Write("Hello, here it is " . date("d.m.y - H:i:s"));
+	}
+	
+	/**
+	* Connection main loop
+	*/
+	protected function listen() {
+		while ($this->socket->isConnected == true) {
+			if ($this->socket->check() > 0) {
+				$data = $this->socket->read();
+				CommandParser::parse($data);
+			}
+		}
+	}	
+	
+	public function disconnect() {
+		$this->socket->disconnect();
 	}
 	
 	public function setUsername($username) {
