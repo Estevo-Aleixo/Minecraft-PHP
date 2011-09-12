@@ -23,21 +23,21 @@ class SocketManager {
 	 *
 	 * @var mixed
 	 */
-	public $serverIP;
+	private $serverIP = 'localhost';
 
 	/**
 	 * Represents the port from the server.
 	 *
 	 * @var integer
 	 */
-	public $serverPort = 25565;
+	private $serverPort = 25565;
 
 	/**
 	 * Are we connected yet?
 	 *
 	 * @var boolean
 	 */
-	public $isConnected = false;
+	private $isConnected = false;
 
 	const SOCKET_READ_MAX = 64;
 	const SOCKET_CHECK_TIMEOUT = 5;
@@ -197,6 +197,24 @@ class SocketManager {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Returns the server port.
+	 *
+	 * @return integer
+	 */
+	public function getServerPort() {
+		return $this->serverPort;
+	}
+
+	/**
+	 * Returns the server host.
+	 *
+	 * @return mixed
+	 */
+	public function getServerHost() {
+		return $this->serverHost;
 	}
 
 }

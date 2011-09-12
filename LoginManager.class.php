@@ -16,7 +16,7 @@ class LoginManager {
 	 *
 	 * @var string
 	 */
-	public $username;
+	private $username;
 
 	/**
 	 * Password from the user.
@@ -37,7 +37,7 @@ class LoginManager {
 	 *
 	 * @var boolean
 	 */
-	public $loggedIn = false;
+	private $loggedIn = false;
 
 	/**
 	 * Calls the login functions.
@@ -132,6 +132,13 @@ class LoginManager {
 		}
 
 		return false;
+	}
+
+	/**
+	 * @see \de\wbbaddons\minecraft\api\MinecraftPHP
+	 */
+	public function getUsername() {
+		return $this->username;
 	}
 
 }

@@ -60,7 +60,7 @@ class MinecraftPackets {
 	 * @param string $username
 	 */
 	public function packet1Write($username) {
-		$package = chr(1);
+		$package  = chr(1);
 		$package .= DataUtil::toInt(self::PROTOCOL_VERSION);
 		$package .= DataUtil::toStr16($username);
 		$package .= DataUtil::toLong(0);
@@ -79,7 +79,7 @@ class MinecraftPackets {
 	 * @param string $username
 	 */
 	public function packet2Write($username) {
-		$package = chr(2); // Packet prefix
+		$package  = chr(2); // Packet prefix
 		$package .= DataUtil::toStr16($username);
 
 		$this->socketManager->write($package);
@@ -101,7 +101,7 @@ class MinecraftPackets {
 	 * @param string $message
 	 */
 	public function packet3Write($message) {
-		$package = chr(3); // Packet prefix
+		$package  = chr(3); // Packet prefix
 		$package .= DataUtil::toStr16($message);
 
 		$this->socketManager->write($package);

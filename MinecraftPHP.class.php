@@ -14,10 +14,39 @@ spl_autoload_register(function ($class) {
  */
 class MinecraftPHP {
 
+	/**
+	 * Should we create a session?
+	 *
+	 * @var boolean
+	 */
 	private $createSession = false;
+
+	/**
+	 * Password from user.
+	 *
+	 * @var string
+	 */
 	private $password = '';
+
+	/**
+	 * Nickname from User.
+	 *
+	 * @var string
+	 */
 	private $username = 'MinecraftPHP-Bot';
-	private $serverHost = "127.0.0.1";
+
+	/**
+	 * Server IP / host.
+	 *
+	 * @var mixed
+	 */
+	private $serverHost = 'localhost';
+
+	/**
+	 * Server port.
+	 *
+	 * @var integer
+	 */
 	private $serverPort = 25565;
 
 	/**
@@ -38,6 +67,9 @@ class MinecraftPHP {
 		$this->listen();
 	}
 
+	/**
+	 * Connects to server.
+	 */
 	public function connect() {
 		$this->packets->packet2Write($this->username);
 
@@ -61,7 +93,7 @@ class MinecraftPHP {
 	}
 
 	/**
-	 * Connection main loop
+	 * Connection main loop.
 	 */
 	protected function listen() {
 		while ($this->socket->isConnected) {
@@ -72,27 +104,59 @@ class MinecraftPHP {
 		}
 	}
 
+	/**
+	 * Disconnects from Server.
+	 */
 	public function disconnect() {
 		$this->socket->disconnect();
 	}
 
-	public function setUsername($username) {
-		$this->username = substr($username, 0, 16);
-	}
-
+	/**
+	 * Returns the username.
+	 *
+	 * @return string
+	 */
 	public function getUsername() {
 		return $this->username;
 	}
 
+	/**
+	 * Sets the username.
+	 *
+	 * @param string $username
+	 */
+	public function setUsername($username) {
+		$this->username = substr($username, 0, 16);
+	}
+
+	/**
+	 * Sets the password.
+	 *
+	 * @param string $password
+	 */
 	public function setPassword($password) {
 		$this->password = $password;
 	}
 
+	/**
+	 * Sets the server port.
+	 *
+	 * @param integer $port
+	 */
 	public function setServerPort($port) {
 		$this->serverPort = $port;
 	}
 
-	//should be obsolete if SocketManager is completely implemented.
+	/**
+	 * Sets the server host.
+	 *
+	 * @param mixed $host
+	 */
+	public function setServerHost($host) {
+		$this->serverHost = $host;
+	}
+
+	// should be obsolete if SocketManager is completely implemented.
 	public function setCreateSession($s) {
 		$this->createSesseion = $s;
 	}
