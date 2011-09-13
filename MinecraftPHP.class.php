@@ -75,7 +75,7 @@ class MinecraftPHP {
 
 		do {
 			if ($this->socket->check() > 0) {
-				$data = $this->socket->read();
+				$data = Packet2::readPacketData();
 				$answered = CommandParser::parse($data);
 			}
 		} while (!$answered);
@@ -84,7 +84,7 @@ class MinecraftPHP {
 
 		do {
 			if ($this->socket->check() > 0) {
-				$data = $this->socket->read();
+				$data = Packet1::readPacketData();
 				$loggedIn = CommandParser::parse($data);
 			}
 		} while (!$loggedIn);
