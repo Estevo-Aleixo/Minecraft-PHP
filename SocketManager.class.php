@@ -138,7 +138,7 @@ class SocketManager {
 	 * @todo create the function.
 	 */
 	public function read($length = 1) {
-		if (($data = socket_read($this->socket, $length) === false)
+		if (($data = socket_read($this->socket, $length) === false))
 			$this->socketError('reading from the socket');
 
 		return $data;
