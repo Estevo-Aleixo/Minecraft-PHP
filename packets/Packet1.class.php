@@ -6,7 +6,7 @@ use Packet;
 class Packet2 implements Packet {
 	public static function writePacketData($data) {
 		$package  = chr(1); // Packet prefix
-		$package .= DataUtil::toInt(15); //must be edited if a new protocol version comes out.
+		$package .= DataUtil::toInt(18); //must be edited if a new protocol version comes out.
 		$package .= DataUtil::toStr16($data); //username
 		$package .= DataUtil::toLong(0); //not used
 		$package .= DataUtil::toInt(0);  //not used
