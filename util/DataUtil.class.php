@@ -12,12 +12,7 @@ namespace de\wbbaddons\minecraft\api\util;
  */
 class DataUtil {
 
-	/**
-	 * This function returns the given data as modified string16.
-	 * 
-	 * @param  string   $data
-	 * @return string16
-	 */
+
 	public static function toStr16($data) {
 		$return = pack("n", strlen($data));
 		$return .= mb_convert_encoding($data, "UTF-16");
@@ -25,33 +20,32 @@ class DataUtil {
 		return $return;
 	}
 
-	/**
-	 * This functions returns the data as decoded string16.
-	 * 
-	 * @param  mixed  $data
-	 * @return string
-	 */
 	public static function readStr16($data) {
-		// todo: write readStr16 function
-		return $data;
+		return mb_convert_encoding($data, "UTF-8");
 	}
 
-	/**
-	 * This functions returns the given data as packed byte.
-	 *
-	 * @param  int  $b
-	 * @return byte
-	 */
+	
 	public static function toByte($b) {
 		return pack('c', $b);
 	}
+	
+	public static function fromByte($b) {
 
-	/**
-	 * This function returns the given data as int like Java does.
-	 * 
-	 * @param  int $v
-	 * @return int
-	 */
+	}	
+
+	
+	public static function toShort($v) {
+		$data = self::toByte($v >> 8 & 0xFF);
+		$data .= self::toByte($v >> 0 & 0xFF);
+
+		return $data;
+	}
+
+	public static function fromShort($v) {
+
+	}
+	
+	
 	public static function toInt($v) {
 		$data = self::toByte($v >> 24 & 0xFF);
 		$data .= self::toByte($v >> 16 & 0xFF);
@@ -61,25 +55,11 @@ class DataUtil {
 		return $data;
 	}
 
-	/**
-	 * This function returns the given data as short like Java does.
-	 * 
-	 * @param  int   $v
-	 * @return short
-	 */
-	public static function toShort($v) {
-		$data = self::toByte($v >> 8 & 0xFF);
-		$data .= self::toByte($v >> 0 & 0xFF);
+	public static function fromInt($v) {
 
-		return $data;
 	}
-
-	/**
-	 * This function returns the given data as long like Java does.
-	 * 
-	 * @param  int  $v
-	 * @return long
-	 */
+	
+	
 	public static function toLong($v) {
 		$data = self::toByte($v >> 56 & 0xFF);
 		$data .= self::toByte($v >> 48 & 0xFF);
@@ -93,4 +73,16 @@ class DataUtil {
 		return $data;
 	}
 
+	public static function fromLong($v) {
+
+	}
+	
+	
+	public static function toFloat($v) {
+
+	}
+	
+	public static function fromFloat($v) {
+
+	} 
 }

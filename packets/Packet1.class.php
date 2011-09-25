@@ -13,6 +13,7 @@ class Packet2 implements Packet {
 		$package .= DataUtil::toByte(0); //not used
 		$package .= DataUtil::toByte(0); //not used
 		$package .= DataUtil::toByte(0); //not used
+		$package .= DataUtil::toByte(0); //not used
 		
 		//socketManager->write($package);
 	}
