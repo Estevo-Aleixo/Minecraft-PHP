@@ -13,7 +13,12 @@ spl_autoload_register(function ($class) {
  * @package 	de\wbbaddons\minecraft\api
  */
 class MinecraftPHP {
-
+	
+	/**
+	 * Defines the protocol version.
+	 */
+	const PROTOCOL_VERSION = 18;
+	 
 	/**
 	 * Should we create a session?
 	 *
