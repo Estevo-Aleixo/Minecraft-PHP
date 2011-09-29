@@ -13,6 +13,10 @@ class Packet3 implements Packet {
 
 	public static function readPacketData() {
 		$length = DataUtil::fromShort(MinecraftPHP::$socket->read(2));
-		return DataUtil::fromStr16(MinecraftPHP::$socket->read($length));
+		$message = DataUtil::fromStr16(MinecraftPHP::$socket->read($length));
+		
+		MinecraftPHP::$logger->log("CHAT: " . $message);
+		
+		return $message;
 	}
 }
