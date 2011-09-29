@@ -1,13 +1,6 @@
 <?php
+namespace de\wbbaddons\minecraft\api\packet;
 
-namespace de\wbbaddons\minecraft\api\packets;
-
-/**
- * 
- * This class defines which functions a packet must have.
- * @author Max
- *
- */
 interface Packet {
 	/**
 	 * 
