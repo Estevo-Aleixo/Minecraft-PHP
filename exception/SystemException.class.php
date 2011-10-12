@@ -4,8 +4,6 @@ use de\wbbaddons\minecraft\api\MinecraftPHP;
 
 class SystemException extends \Exception {
 	protected $description;
-	protected $information = '';
-	protected $functions = '';
 	
 	/**
 	 * Creates a new SystemException.
@@ -32,7 +30,6 @@ class SystemException extends \Exception {
 		$errorMessage .= "error message: " . str_replace(array("\r\n", "\n", "\r"), '', $this->getMessage()) . "\n";
 		$errorMessage .= "description: " . $this->description . "\n";
 		$errorMessage .= "error code: " . $this->getCode() . "\n";
-		if(!empty($this->information)) $errorMessage .= $this->information . "\n";
 		$errorMessage .= "file: " . $this->getFile() . "\n";
 		$errorMessage .= "php version: " . phpversion() . "\n";
 		$errorMessage .= "date: " . gmdate('r') . "\n";
@@ -75,9 +72,8 @@ class SystemException extends \Exception {
 				<h1 style="margin: 0px;">Fatal Error:</h1>
 				<b>error message: </b>'. $this->getMessage() ."<br />\n".'
 				<b>description: </b>'. $this->description ."<br />\n".
-				'<b>error code: </b>'. intval($this->getCode())."<br />\n";
-				if(!empty($this->information)) echo $this->information . "<br />\n";
-				echo '<b>file: </b> '. $this->getFile().' ('. $this->getLine().')'."<br />\n".'
+				'<b>error code: </b>'. intval($this->getCode())."<br />\n".
+				'<b>file: </b> '. $this->getFile().' ('. $this->getLine().')'."<br />\n".'
 				<b>php version: </b> '. phpversion()."<br />\n".'
 				<b>date: </b>'. gmdate('r') ."<br />\n".'
 				<b>Stacktrace: </b><br />

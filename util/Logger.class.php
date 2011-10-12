@@ -33,8 +33,8 @@ class Logger {
 			case self::HTML:
 				$this->method = self::HTML;
 				echo file_get_contents(__DIR__ . '/htmlLog.tpl');
-				"<tr><td class='time'>" . self::date() . "</td> " . "<td class='message'>HTMLog initialized!</td></tr>\n";
-				if($this->logToFile) "<tr><td class='time'>" . self::date() . "</td> " . "<td class='message'>HTML tags will be stripped in logfile.</td></tr>\n";
+				echo "<tr><td class='time'>" . self::date() . "</td> " . "<td class='message'>HTMLog initialized!</td></tr>\n";
+				if($this->logToFile) echo "<tr><td class='time'>" . self::date() . "</td> " . "<td class='message'>HTML tags will be stripped in logfile.</td></tr>\n";
 				break;
 			case self::STD:
 				$this->method = self::STD;
