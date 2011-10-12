@@ -3,8 +3,8 @@ namespace de\wbbaddons\minecraft\api\packet;
 use de\wbbaddons\minecraft\api\util\DataUtil;
 use de\wbbaddons\minecraft\api\MinecraftPHP;
 
-class Packet19 implements Packet {
-	public static function writePacketData($data) {
+class Packet19 {
+	public static function writePacketData() {
 
 	}
 

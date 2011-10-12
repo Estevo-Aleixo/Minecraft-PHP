@@ -11,8 +11,6 @@ use de\wbbaddons\minecraft\api\MinecraftPHP;
  * @subpackage	util
  */
 class DataUtil {
-
-
 	public static function toStr16($v) {
 		$str16 = self::toShort(strlen($v));
 		$str16 .= mb_convert_encoding($v, "UTF-16");
@@ -112,22 +110,39 @@ class DataUtil {
 	}
 
 	public static function fromLong($v) {
-		@list(, $hihi, $hilo, $lohi, $lolo) = unpack('n*', $v);
+		list(, $hihi, $hilo, $lohi, $lolo) = unpack('n*', $v);
+		
+		if(MinecraftPHP::$debug) MinecraftPHP::$logger->log("DEBUG: DataUtil::fromLong->v = " . $v);
+		if(MinecraftPHP::$debug) MinecraftPHP::$logger->log("DEBUG: DataUtil::fromLong->list = " . print_r(array($hihi, $hilo, $lohi, $lolo)));
 		return ($hihi * (0xffff+1) + $hilo) * (0xffffffff+1) + ($lohi * (0xffff+1) + $lolo);
 	}
 
 
 	public static function toFloat($v) {
-
+		list(, $float) = pack('N*', $v / (0xffffffff+1), $v & 0xffffffff);
+		
+		if(MinecraftPHP::$debug) MinecraftPHP::$logger->log("DEBUG: DataUtil::toFloat->v = " . $v);
+		if(MinecraftPHP::$debug) MinecraftPHP::$logger->log("DEBUG: DataUtil::toFloat->float = " . $float);
+		
+		return $float;
 	}
 
 	public static function fromFloat($v) {
 		list(, $float) = unpack('f', $v);
+		
+		if(MinecraftPHP::$debug) MinecraftPHP::$logger->log("DEBUG: DataUtil::fromFloat->v = " . $v);
+		if(MinecraftPHP::$debug) MinecraftPHP::$logger->log("DEBUG: DataUtil::fromFloat->float = " . $float);
+		
 		return $float;
 	}
 
 	public static function toDouble($v) {
-
+		//list(, $double) = 
+		
+		if(MinecraftPHP::$debug) MinecraftPHP::$logger->log("DEBUG: DataUtil::toFloat->v = " . $v);
+		if(MinecraftPHP::$debug) MinecraftPHP::$logger->log("DEBUG: DataUtil::toFloat->float = " . $float);
+		
+		return $double;
 	}
 
 	public static function fromDouble($v) {

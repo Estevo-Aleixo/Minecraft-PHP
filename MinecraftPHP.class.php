@@ -4,6 +4,7 @@ spl_autoload_register(function ($class) {
 	require_once(__DIR__.'/'.str_replace(array('de\\wbbaddons\\minecraft\\api\\', '\\'), array('', DIRECTORY_SEPARATOR), $class).'.class.php');
 });
 
+use de\wbbaddons\minecraft\api\exception\SystemException;
 use de\wbbaddons\minecraft\api\util\Logger;
 use de\wbbaddons\minecraft\api\packet\Packet1;
 use de\wbbaddons\minecraft\api\packet\Packet2;
@@ -19,14 +20,42 @@ class MinecraftPHP {
 	protected $serverPort = 25565;
 	public static $socket;
 	public static $logger;
-	
+	const MCPDIR = __DIR__;
 	const VERSION = "1.0.0 alpha";
-	
+
 	public function __construct() {
+		set_exception_handler(array($this, 'handleException'));
+		set_error_handler(array($this, 'handleError'), E_ALL);
+		
 		self::$logger = new Logger(Logger::STD, true);
+		self::$logger->logDir = __DIR__ . "/logs";
 		self::$logger->logfileName = "MinecraftPHP";
 		self::$logger->init();
 		self::$logger->log("Welcome to MinecraftPHP Version " . self::VERSION);
+	}
+
+	public static final function handleException(\Exception $e) {
+		if (!defined("STDOUT")) {
+			$e->showHTML();
+			exit;
+		} else {
+			$e->showSTD();
+			exit;
+		}
+	}	
+
+	public static final function handleError($errorNo, $message, $filename, $lineNo) { 
+		if (error_reporting() != 0) {
+			$type = 'error';
+			switch ($errorNo) {
+				case 2: $type = 'warning';
+					break;
+				case 8: $type = 'notice';
+					break;
+			}
+			
+			throw new SystemException('PHP '.$type.' in file '.$filename.' ('.$lineNo.'): '.$message, 0);
+		}
 	}
 	
 	public function init() {
@@ -65,9 +94,8 @@ class MinecraftPHP {
 				if(self::$debug) self::$logger->log("DEBUG: Login-data: " . $handshaked);
 			} else $handshaked = false;
 		} while(!$handshaked);
-
 		
-		Packet3::writePacketData("Hello :D");
+		Packet3::writePacketData("Hallo");
 		self::$logger->log("Connected.");
 	}
 	
@@ -75,11 +103,11 @@ class MinecraftPHP {
 		if(self::$debug) self::$logger->log("DEBUG: Listening - loop");
 		while (self::$socket->isConnected) {
 			if (self::$socket->check() > 0) {
-				$data = self::$socket->read(1);
-				PacketHandler::parse($data);
+				$id = ord(self::$socket->read(1));
+				PacketHandler::parse($id);
 			}
 		}
-		sleep(.5);
+		usleep(500000); //let the CPU rest a bit.
 	}
 	
 	public function disconnect() {
