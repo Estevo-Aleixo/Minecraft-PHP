@@ -50,7 +50,14 @@ class DataUtil {
 		return $ord;
 	}
 
+	public static function toUnsignedByte($v) {
+		self::toByte($v);
+	}
 
+	public static function fromUnsignedByte($v) {
+		self::fromByte($v);
+	}
+	
 	public static function toShort($v) {
 		$short  = self::toByte($v >> 8 & 0xFF);
 		$short .= self::toByte($v >> 0 & 0xFF);
