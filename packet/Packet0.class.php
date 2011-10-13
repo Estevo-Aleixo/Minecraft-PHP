@@ -5,10 +5,15 @@ use de\wbbaddons\minecraft\api\MinecraftPHP;
 
 class Packet0 {
 	public static function writePacketData($id) {
-		DataUtil::toInt($id);
+		$packet  = chr(3);
+		$packet .= DataUtil::toInt($id);
+		
+		MinecraftPHP::$socket->write($packet);		
 	}
 
 	public static function readPacketData() {
-		DataUtil::fromInt(MinecraftPHP::$socket->read(4));
+		$hash = DataUtil::fromInt(MinecraftPHP::$socket->read(4));
+		
+		return $hash;
 	}
 }

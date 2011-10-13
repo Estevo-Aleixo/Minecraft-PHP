@@ -5,10 +5,10 @@ use de\wbbaddons\minecraft\api\MinecraftPHP;
 
 class Packet2 {
 	public static function writePacketData($username) {
-		$package  = chr(2); // Packet prefix
-		$package .= DataUtil::toStr16($username);
+		$packet  = chr(2); // Packet prefix
+		$packet .= DataUtil::toStr16($username);
 		
-		MinecraftPHP::$socket->write($package);
+		MinecraftPHP::$socket->write($packet);
 	}
 
 	public static function readPacketData() {
