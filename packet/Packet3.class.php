@@ -16,8 +16,7 @@ class Packet3 {
 	public static function readPacketData() {
 		//get length of the str16 value.
 		$length = DataUtil::fromShort(MinecraftPHP::$socket->read(2));
-		//if length is greater than 0, get the decoded str16 value.
-		if($length > 0)	$message = DataUtil::fromStr16(MinecraftPHP::$socket->read($length));
+		$message = DataUtil::fromStr16(MinecraftPHP::$socket->read($length));
 		
 		//log message
 		if(isset($message) && !empty($message)) MinecraftPHP::$logger->log("CHAT: " . $message);

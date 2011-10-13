@@ -16,7 +16,6 @@ class Packet2 {
 		$length = DataUtil::fromShort(MinecraftPHP::$socket->read(2));
 		if(MinecraftPHP::$debug) MinecraftPHP::$logger->log("DEBUG: Packet2->readPacketData()->length: " . $length);
 		//if length is greater than 0, return the decoded str16 value.
-		if($length > 0)	return DataUtil::fromStr16(MinecraftPHP::$socket->read($length));
-		else return false;
+		return DataUtil::fromStr16(MinecraftPHP::$socket->read($length));
 	}
 }
