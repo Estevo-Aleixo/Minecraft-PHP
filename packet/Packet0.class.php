@@ -5,7 +5,7 @@ use de\wbbaddons\minecraft\api\MinecraftPHP;
 
 class Packet0 {
 	public static function writePacketData($id) {
-		$packet  = chr(3);
+		$packet  = chr(0);
 		$packet .= DataUtil::toInt($id);
 		
 		MinecraftPHP::$socket->write($packet);		
